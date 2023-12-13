@@ -5,6 +5,7 @@ import com.tobeto.rent_a_car.services.dtos.rental.responses.GetRentalResponse;
 import com.tobeto.rent_a_car.services.dtos.type.requests.AddTypeRequest;
 import com.tobeto.rent_a_car.services.dtos.type.requests.UpdateTypeRequest;
 import com.tobeto.rent_a_car.services.dtos.type.responses.GetAllTypesResponse;
+import com.tobeto.rent_a_car.services.dtos.type.responses.GetListTypeResponse;
 import com.tobeto.rent_a_car.services.dtos.type.responses.GetTypeResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +25,10 @@ public class TypesController {
         return typeService.getAll();
     }
 
-    @GetMapping("{id}")
+    /*@GetMapping("{id}")
     public GetTypeResponse getById(@PathVariable int id){
         return typeService.getById(id);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
@@ -43,6 +44,13 @@ public class TypesController {
     public void update(@RequestBody UpdateTypeRequest updateTypeRequest){
         typeService.update(updateTypeRequest);
     }
+
+    @GetMapping("type")
+    public List<GetListTypeResponse>getByType(String name){
+        return typeService.getByName(name);
+    }
+
+
 }
 
 /*

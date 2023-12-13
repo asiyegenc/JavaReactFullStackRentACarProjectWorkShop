@@ -7,6 +7,7 @@ import com.tobeto.rent_a_car.services.dtos.car.requests.AddCarRequest;
 import com.tobeto.rent_a_car.services.dtos.car.requests.UpdateCarRequest;
 import com.tobeto.rent_a_car.services.dtos.car.responses.GetAllCarsResponse;
 import com.tobeto.rent_a_car.services.dtos.car.responses.GetCarResponse;
+import com.tobeto.rent_a_car.services.dtos.car.responses.GetListCarResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,10 +28,10 @@ public class CarsController {
         return carService.getAll();
     }
 
-    @GetMapping("{id}")
+    /*@GetMapping("{id}")
     public GetCarResponse getById(@PathVariable int id) {
         return carService.getById(id);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
@@ -46,7 +47,27 @@ public class CarsController {
     public void update(@RequestBody UpdateCarRequest updateCarRequest) {
         carService.update(updateCarRequest);
     }
-}
+
+    @GetMapping("modelName")
+    public List<Car> getByModelName(@RequestParam String modelName){
+        return carService.getByModelName(modelName);
+    }
+
+    @GetMapping("status")
+    public List<GetListCarResponse> getByStatus() {
+        return carService.getByStatus();
+    }
+
+    @GetMapping("modelYear")
+    public List<GetListCarResponse> getByOrderBymodelYear() {
+        return carService.getByOrderBymodelYear();
+        }
+
+    @GetMapping("BrandAndModelName")
+    public List<GetListCarResponse>getByBrandAndModelName(){
+        return carService.getByBrandAndModelName();
+    }
+    }
 
   /*
 

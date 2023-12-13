@@ -1,11 +1,13 @@
 package com.tobeto.rent_a_car.controllers;
 
+import com.tobeto.rent_a_car.entities.Customer;
 import com.tobeto.rent_a_car.services.abstracts.CustomerService;
 
 import com.tobeto.rent_a_car.services.dtos.customer.requests.AddCustomerRequest;
 import com.tobeto.rent_a_car.services.dtos.customer.requests.UpdateCustomerRequest;
 import com.tobeto.rent_a_car.services.dtos.customer.responses.GetAllCustomersResponse;
 import com.tobeto.rent_a_car.services.dtos.customer.responses.GetCustomerResponse;
+import com.tobeto.rent_a_car.services.dtos.customer.responses.GetListCustomerResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,15 +20,16 @@ public class CustomersController {
     public CustomersController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
     @GetMapping
     public List<GetAllCustomersResponse> getAll() {
         return customerService.getAll();
     }
 
-    @GetMapping("{id}")
+   /* @GetMapping("{id}")
     public GetCustomerResponse getById(@PathVariable int id) {
         return customerService.getById(id);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
@@ -41,6 +44,20 @@ public class CustomersController {
     @PutMapping
     public void update(@RequestBody UpdateCustomerRequest updateCustomerRequest) {
         customerService.update(updateCustomerRequest);
+    }
+
+    @GetMapping("firstName")
+    public List<GetListCustomerResponse> getByFirstName(String firstName){
+        return customerService.getByFirstName(firstName);
+    }
+    @GetMapping("email")
+    public List<GetListCustomerResponse> getByEmailLike(String email) {
+        return customerService.getByEmailLike(email);
+    }
+
+    @GetMapping("phone")
+    public List<Customer>getByPhone(String phone){
+        return customerService.getByPhone(phone);
     }
 }
 

@@ -1,26 +1,22 @@
 package com.tobeto.rent_a_car.services.dtos.car.requests;
 
-import com.tobeto.rent_a_car.entities.Brand;
-import com.tobeto.rent_a_car.entities.Color;
-import com.tobeto.rent_a_car.entities.Price;
-import com.tobeto.rent_a_car.entities.Type;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class UpdateCarRequest {
-    private int id;
 
+    @NotNull(message = "Model yılı boş olamaz")
     private int modelYear;
 
+    @Size(min = 3, max = 50, message = "Model adı boş olamaz")
     private String modelName;
 
-    private String status;
+    @NotNull(message = "Renk ID doğru girilmelidir")
+    private int colorId;
 
-    private Price priceId;
-
-    private Brand brandId;
-
-    private Color colorId;
-
-    private Type typeId;
+    @NotNull(message = "Type ID doğru girilmelidir")
+    private int typeId;
 }

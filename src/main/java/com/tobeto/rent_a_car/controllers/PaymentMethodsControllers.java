@@ -4,6 +4,7 @@ import com.tobeto.rent_a_car.services.abstracts.PaymentMethodService;
 import com.tobeto.rent_a_car.services.dtos.paymentMethod.requests.AddPaymentMethodRequest;
 import com.tobeto.rent_a_car.services.dtos.paymentMethod.requests.UpdatePaymentMethodRequest;
 import com.tobeto.rent_a_car.services.dtos.paymentMethod.responses.GetAllPaymentMethodsResponse;
+import com.tobeto.rent_a_car.services.dtos.paymentMethod.responses.GetListPaymentMethodResponse;
 import com.tobeto.rent_a_car.services.dtos.paymentMethod.responses.GetPaymentMethodResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,10 @@ public class PaymentMethodsControllers {
         return paymentMethodService.getAll();
     }
 
-    @GetMapping("{id}")
+  /*  @GetMapping("{id}")
     public GetPaymentMethodResponse getById(@PathVariable int id) {
         return paymentMethodService.getById(id);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
@@ -43,6 +44,11 @@ public class PaymentMethodsControllers {
     @PutMapping
     public void update(@RequestBody UpdatePaymentMethodRequest updatePaymentMethodRequest) {
         paymentMethodService.update(updatePaymentMethodRequest);
+    }
+
+    @GetMapping("paymentType")
+    public List<GetListPaymentMethodResponse>getByPaymentType(String paymentType){
+        return paymentMethodService.getByPaymentTypeLike(paymentType);
     }
 }
 

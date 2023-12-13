@@ -4,6 +4,7 @@ import com.tobeto.rent_a_car.services.abstracts.PriceService;
 import com.tobeto.rent_a_car.services.dtos.price.requests.AddPriceRequest;
 import com.tobeto.rent_a_car.services.dtos.price.requests.UpdatePriceRequest;
 import com.tobeto.rent_a_car.services.dtos.price.responses.GetAllPricesResponse;
+import com.tobeto.rent_a_car.services.dtos.price.responses.GetListPriceResponse;
 import com.tobeto.rent_a_car.services.dtos.price.responses.GetPriceResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/prices")
-public class PricesController {
+public class  PricesController {
 
     private final PriceService priceService;
 
@@ -43,6 +44,21 @@ public class PricesController {
     @PutMapping
     public void update(@RequestBody UpdatePriceRequest updatePriceRequest) {
         priceService.update(updatePriceRequest);
+    }
+
+    @GetMapping("hourlyFee")
+    public List<GetListPriceResponse>getByDOrderByHourlyFee(Double hourlyFee){
+        return priceService.getByOrderByHourlyFee(hourlyFee);
+    }
+
+    @GetMapping("dailyFee")
+    public List<GetListPriceResponse>getByDOrderByDailyFee(Double dailyFee) {
+        return priceService.getByOrderByHourlyFee(dailyFee);
+    }
+
+    @GetMapping("weeklyFee")
+        public List<GetListPriceResponse>getByDOrderByWeeklyFee(Double weeklyFee){
+            return priceService.getByOrderByWeeklyFee(weeklyFee);
     }
 }
 

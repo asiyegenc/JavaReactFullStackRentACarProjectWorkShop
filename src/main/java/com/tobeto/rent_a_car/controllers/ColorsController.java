@@ -1,14 +1,11 @@
 package com.tobeto.rent_a_car.controllers;
 
 import com.tobeto.rent_a_car.services.abstracts.ColorService;
-import com.tobeto.rent_a_car.services.dtos.car.requests.AddCarRequest;
-import com.tobeto.rent_a_car.services.dtos.car.requests.UpdateCarRequest;
-import com.tobeto.rent_a_car.services.dtos.car.responses.GetAllCarsResponse;
-import com.tobeto.rent_a_car.services.dtos.car.responses.GetCarResponse;
 import com.tobeto.rent_a_car.services.dtos.color.requests.AddColorRequest;
 import com.tobeto.rent_a_car.services.dtos.color.requests.UpdateColorRequest;
 import com.tobeto.rent_a_car.services.dtos.color.responses.GetAllColorsResponse;
 import com.tobeto.rent_a_car.services.dtos.color.responses.GetColorResponse;
+import com.tobeto.rent_a_car.services.dtos.color.responses.GetListColorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,11 +23,11 @@ public class ColorsController {
     public List<GetAllColorsResponse> getAll() {
         return colorService.getAll();
     }
-
+/*
     @GetMapping("{id}")
     public GetColorResponse getById(@PathVariable int id) {
         return colorService.getById(id);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
@@ -45,6 +42,12 @@ public class ColorsController {
     public void update(@RequestBody UpdateColorRequest updateColorRequest) {
         colorService.update(updateColorRequest);
     }
+
+    @GetMapping("color")
+    public List<GetListColorResponse> getByColorIdDto(String color){
+        return colorService.getByColorIdDto(color);
+    }
+
 }
 
 

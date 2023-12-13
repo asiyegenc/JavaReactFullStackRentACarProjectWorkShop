@@ -1,8 +1,6 @@
 package com.tobeto.rent_a_car.services.dtos.rental.requests;
 
-import com.tobeto.rent_a_car.entities.Car;
-import com.tobeto.rent_a_car.entities.Customer;
-import com.tobeto.rent_a_car.entities.PaymentMethod;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,13 +8,19 @@ import java.time.LocalDate;
 @Data
 public class AddRentalRequest {
 
+    @NotNull(message = "Kiralama tarihi boş olamaz")
     private LocalDate rentalDate;
 
+    @NotNull(message = "Dönüş tarihi boş olamaz")
     private LocalDate returnDate;
 
-    private Customer customerId;
+    @NotNull(message = "CustomerId boş olamaz")
+    private int customerId;
 
-    private Car carId;
+    @NotNull(message = "CarId boş olamaz")
+    private int carId;
 
-    private PaymentMethod paymentMethodId;
+    @NotNull(message = "PaymentMethodId boş olamaz")
+    private int paymentMethodId;
+
 }

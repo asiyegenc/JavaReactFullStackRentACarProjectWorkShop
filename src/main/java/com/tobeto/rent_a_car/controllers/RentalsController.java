@@ -1,14 +1,15 @@
 package com.tobeto.rent_a_car.controllers;
 
+import com.tobeto.rent_a_car.entities.Rental;
 import com.tobeto.rent_a_car.services.abstracts.RentalService;
-import com.tobeto.rent_a_car.services.dtos.price.responses.GetAllPricesResponse;
-import com.tobeto.rent_a_car.services.dtos.price.responses.GetPriceResponse;
 import com.tobeto.rent_a_car.services.dtos.rental.requests.AddRentalRequest;
 import com.tobeto.rent_a_car.services.dtos.rental.requests.UpdateRentalRequest;
 import com.tobeto.rent_a_car.services.dtos.rental.responses.GetAllRentalsResponse;
+import com.tobeto.rent_a_car.services.dtos.rental.responses.GetListRentalResponse;
 import com.tobeto.rent_a_car.services.dtos.rental.responses.GetRentalResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,8 +43,18 @@ public class RentalsController {
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateRentalRequest updateRentalRequest){
+    public void update(@RequestBody UpdateRentalRequest updateRentalRequest) {
         rentalService.update(updateRentalRequest);
+    }
+
+    @GetMapping("dto")
+    public List<GetListRentalResponse> getAllRentalsDto(){
+        return  rentalService.getAllDto();
+    }
+
+    @GetMapping("rental")
+    public List<GetListRentalResponse>getByDateBetween(LocalDate rentalDate, LocalDate returnDate){
+        return rentalService.getByDateBetween(rentalDate, returnDate);
     }
 }
 

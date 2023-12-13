@@ -1,10 +1,12 @@
 package com.tobeto.rent_a_car.controllers;
 
+import com.tobeto.rent_a_car.entities.Brand;
 import com.tobeto.rent_a_car.services.abstracts.BrandService;
 import com.tobeto.rent_a_car.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rent_a_car.services.dtos.brand.requests.UpdateBrandRequest;
 import com.tobeto.rent_a_car.services.dtos.brand.responses.GetAllBrandsResponse;
 import com.tobeto.rent_a_car.services.dtos.brand.responses.GetBrandResponse;
+import com.tobeto.rent_a_car.services.dtos.brand.responses.GetListBrandResponse;
 import com.tobeto.rent_a_car.services.dtos.car.requests.UpdateCarRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,16 @@ public class BrandsController {
     @PutMapping
     public void update(@RequestBody UpdateBrandRequest updateBrandRequest){
         brandService.update(updateBrandRequest);
+    }
+
+    @GetMapping("name")
+    public List<Brand>getByName(@RequestParam String name){
+        return brandService.getByName(name);
+    }
+
+    @GetMapping("namedto")
+    public List<GetListBrandResponse>getByNameDto(){
+        return brandService.getByNameDto();
     }
 }
 
